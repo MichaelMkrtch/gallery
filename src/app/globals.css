@@ -4,30 +4,33 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-primary: var(--color-primary);
-    --font-sans: var(--font-geist-sans);
-    --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 :root {
-    --foreground: oklch(0.145 0 0);
-    --background: oklch(0.9923 0.0029 84.56);
-    --color-primary: oklch(0.7191 0.1248 219.88);
+  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.9923 0.0029 84.56);
+  --color-primary: oklch(0.5309 0.21 24.5);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --background: oklch(0.9923 0.0029 84.56);
-    --color-primary: oklch(0.7191 0.1248 219.88);
+  --background: oklch(0.145 0 0);
+  --background: oklch(0.9923 0.0029 84.56);
+  --color-primary: oklch(0.5309 0.21 24.5);
 }
 
 @layer base {
-    * {
-        @apply border-red-500 outline-red-500/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .navlink {
+    @apply hover:text-primary transition-colors duration-150;
+  }
 }

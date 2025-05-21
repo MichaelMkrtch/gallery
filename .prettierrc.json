@@ -1,0 +1,24 @@
+{
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "importOrder": [
+    "<TYPES>^(node:)",
+    "<TYPES>",
+    "<TYPES>^[.]",
+    "",
+    "^react$|react-dom$",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^(@api|@assets|@ui)(/.*)$",
+    "",
+    "@/",
+    "",
+    "^(?!.*[.]css$).*$",
+    ".css$",
+    "",
+    "^[.]",
+    "/src*"
+  ]
+}

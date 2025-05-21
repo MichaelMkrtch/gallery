@@ -9,6 +9,17 @@
   --color-primary: var(--color-primary);
   --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-geist-mono);
+
+  --animate-fade-in: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 :root {
@@ -32,5 +43,13 @@
 @layer components {
   .navlink {
     @apply hover:text-primary transition-colors duration-150;
+  }
+
+  .carousel-container {
+    @apply bg-background relative mb-6 overflow-hidden rounded-md p-4 before:absolute before:top-0 before:-right-20 before:bottom-0 before:-left-20;
+  }
+
+  .carousel-item {
+    @apply mx-auto aspect-auto h-[600px] w-[1068px];
   }
 }

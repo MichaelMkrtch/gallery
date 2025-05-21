@@ -1,16 +1,17 @@
 "use client";
 
-import { Input } from "./ui/input";
-import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Input } from "./ui/input";
+import { Search } from "lucide-react";
+
 export default function Header() {
   return (
-    <header className="border-foreground/5 relative mx-10 flex items-center justify-between rounded-br-3xl rounded-bl-3xl border border-t-0 px-10 py-6 shadow-xs">
+    <header className="border-foreground/5 bg-background/60 fixed top-0 right-0 left-0 z-50 mx-10 flex items-center justify-between rounded-br-3xl rounded-bl-3xl border border-t-0 px-10 py-6 shadow-xs backdrop-blur-lg">
       <Link
         href="/"
-        className="hover:text-primary flex w-[270px] items-center justify-start gap-8"
+        className="flex w-[270px] items-center justify-start gap-8"
       >
         <Image
           src="/logo-simple-dark.png"

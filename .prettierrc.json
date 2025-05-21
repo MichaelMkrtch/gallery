@@ -8,6 +8,7 @@
     "<TYPES>",
     "<TYPES>^[.]",
     "",
+    "next",
     "^react$|react-dom$",
     "<THIRD_PARTY_MODULES>",
     "",
@@ -18,7 +19,6 @@
     "^(?!.*[.]css$).*$",
     ".css$",
     "",
-    "^[.]",
-    "/src*"
+    "^[.]"
   ]
 }

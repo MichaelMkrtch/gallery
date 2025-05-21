@@ -1,5 +1,9 @@
-import Header from "@/components/Header";
+import OverviewCarousel from "@/feat/home/components/OverviewCarousel";
 
 export default function Home() {
-  return <Header />;
+  return (
+    <main>
+      <OverviewCarousel />
+    </main>
+  );
 }

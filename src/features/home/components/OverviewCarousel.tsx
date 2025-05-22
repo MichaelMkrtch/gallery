@@ -1,11 +1,12 @@
 "use client";
 
+import type { CarouselApi } from "@/components/ui/carousel";
+
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -61,12 +62,12 @@ export default function OverviewCarousel() {
   }, [carouselApi]);
 
   return (
-    <div className="carousel-container group/overview relative">
+    <section className="carousel-container animate-fade-in group/overview">
       <Carousel
         setApi={setCarouselApi}
         plugins={[autoplayPlugin.current]}
         opts={{ loop: true }}
-        className="mx-auto w-full max-w-[90%]"
+        className="mx-auto"
       >
         <CarouselContent>
           {imageLinks.map((link) => {
@@ -77,7 +78,7 @@ export default function OverviewCarousel() {
                   alt="demo image"
                   width="1920"
                   height="1080"
-                  className="carousel-item rounded-md"
+                  className="carousel-item"
                 />
               </CarouselItem>
             );
@@ -92,11 +93,11 @@ export default function OverviewCarousel() {
           className="animate-fade-in hidden group-hover/overview:flex"
         />
 
-        <div className="z-50 mt-4 flex justify-center gap-1.5">
+        <div className="z-50 mt-5 flex h-4 justify-center gap-1.5">
           {carouselApi?.scrollSnapList().map((_, index) => (
             <div
               key={index}
-              className={`${currentSlide === index ? "border-primary" : "border-foreground/15"} bg-background top-0 h-4 w-4 rounded-full border-3`}
+              className={`${currentSlide === index ? "border-primary" : "border-neutral-300"} bg-background top-0 h-4 w-4 rounded-full border-3`}
               onClick={() => {
                 carouselApi.scrollTo(index);
                 carouselApi.plugins().autoplay.reset();
@@ -105,6 +106,6 @@ export default function OverviewCarousel() {
           ))}
         </div>
       </Carousel>
-    </div>
+    </section>
   );
 }

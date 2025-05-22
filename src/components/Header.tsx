@@ -8,7 +8,7 @@ import { Search } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="border-foreground/5 bg-background/60 fixed top-0 right-0 left-0 z-50 mx-10 flex items-center justify-between rounded-br-3xl rounded-bl-3xl border border-t-0 px-10 py-6 shadow-xs backdrop-blur-lg">
+    <header className="border-foreground/5 bg-background/70 fixed top-0 right-0 left-0 z-50 mx-auto flex max-w-md items-center justify-between rounded-br-3xl rounded-bl-3xl border border-t-0 px-10 py-6 shadow-sm backdrop-blur-xl md:max-w-2xl lg:max-w-6xl 2xl:max-w-7xl">
       <Link
         href="/"
         className="flex w-[270px] items-center justify-start gap-8"

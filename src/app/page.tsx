@@ -1,9 +1,27 @@
-import OverviewCarousel from "@/feat/home/components/OverviewCarousel";
+import ArtistsCarousel from "@/features/home/components/ArtistsCarousel";
+import OverviewCarousel from "@/features/home/components/OverviewCarousel";
+import RecentArtGrid from "@/features/home/components/RecentArtGrid";
 
 export default function Home() {
   return (
     <main>
       <OverviewCarousel />
+
+      <section className="mt-12 mb-8">
+        <h2 className="mb-2 text-center text-xl font-semibold tracking-tight">
+          Welcome to the Agajanian Gallery
+        </h2>
+        <p className="mx-auto text-center text-lg tracking-wide text-pretty 2xl:max-w-1/2">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit error
+          nisi sequi tempore obcaecati vero impedit dolores, iste totam quod
+          eaque deleniti, adipisci. Soluta officiis nesciunt accusamus voluptas
+          totam.
+        </p>
+      </section>
+
+      <ArtistsCarousel />
+
+      <RecentArtGrid />
     </main>
   );
 }

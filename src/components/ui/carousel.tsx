@@ -32,7 +32,7 @@ type CarouselContextProps = {
 } & CarouselProps;
 
 type CarouselButton = React.ComponentProps<typeof Button> & {
-  api: CarouselApi;
+  api?: CarouselApi;
 };
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);

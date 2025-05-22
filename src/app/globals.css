@@ -36,7 +36,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-medium;
   }
 }
 
@@ -46,10 +46,10 @@
   }
 
   .carousel-container {
-    @apply bg-background relative mb-6 overflow-hidden rounded-md p-4 before:absolute before:top-0 before:-right-20 before:bottom-0 before:-left-20;
+    @apply relative mb-6 overflow-hidden rounded-md;
   }
 
   .carousel-item {
-    @apply mx-auto aspect-auto h-[600px] w-[1068px];
+    @apply mx-auto aspect-[21/9] rounded-md object-cover;
   }
 }

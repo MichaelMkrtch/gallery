@@ -8,19 +8,20 @@ import { Search } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="border-foreground/5 bg-background/70 fixed top-0 right-0 left-0 z-50 mx-auto flex max-w-md items-center justify-between rounded-br-3xl rounded-bl-3xl border border-t-0 px-10 py-6 shadow-sm backdrop-blur-xl md:max-w-2xl lg:max-w-6xl 2xl:max-w-7xl">
+    <header className="bg-background/80 fixed top-0 right-0 left-0 z-50 mx-auto flex items-center justify-between rounded-br-xl rounded-bl-xl border border-t-0 border-neutral-200 px-5 py-5 drop-shadow-xs backdrop-blur-xl md:max-w-full md:rounded-br-3xl md:rounded-bl-3xl md:px-10 md:py-6 lg:max-w-6xl 2xl:max-w-7xl">
       <Link
         href="/"
-        className="flex w-[270px] items-center justify-start gap-8"
+        className="flex items-center justify-start gap-3 lg:w-60 lg:gap-6 2xl:w-[270px]"
       >
         <Image
           src="/logo-simple-dark.png"
           alt="Agajanian Gallery logo (AG)."
           height="44"
           width="44"
+          className="size-6 md:size-8 lg:size-10"
         />
-        <div className="bg-foreground absolute top-11 left-20 h-0.5 w-10 rotate-90 rounded-tl-sm rounded-br-sm" />
-        <h1 className="text-primary flex flex-col text-lg leading-5 font-semibold tracking-tight transition-colors duration-150 ease-in">
+        <div className="bg-foreground absolute left-8.5 h-0.5 w-8 rotate-90 rounded-tl-sm rounded-br-sm sm:block md:hidden lg:top-11 lg:left-18 lg:block lg:w-10" />
+        <h1 className="text-primary flex flex-col leading-4 font-semibold tracking-tight transition-colors duration-150 ease-in md:hidden md:text-lg md:leading-5 lg:flex">
           <span>AGAJANIAN</span>
           <span>GALLERY</span>
         </h1>
@@ -29,7 +30,7 @@ export default function Header() {
       <nav>
         {/* <ul> used for accessibility. Screen readers notify about the presence
           of a list and the number of list items. */}
-        <ul className="flex justify-around gap-3.5 text-lg font-medium tracking-tight">
+        <ul className="hidden justify-around gap-3.5 font-medium tracking-tight md:flex lg:text-lg">
           <li className="navlink">
             <Link href="/artists">Artists</Link>
           </li>
@@ -48,10 +49,10 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="border-foreground/10 relative flex items-center justify-center rounded-full border-1 shadow-xs">
-        <Search size="20" className="ml-2" />
+      <div className="bg-background relative hidden items-center justify-center rounded-full border-1 border-neutral-200 shadow-sm md:flex lg:w-60 2xl:w-[270px]">
+        <Search size="20" className="ml-2 text-neutral-500" />
         <Input
-          className="placeholder:text-foreground/60 h-9 w-60 border-none font-semibold shadow-none placeholder:font-medium focus-visible:ring-0"
+          className="h-9 w-full border-none font-semibold shadow-none placeholder:font-medium placeholder:text-neutral-400 focus-visible:ring-0"
           placeholder="Search"
         />
       </div>

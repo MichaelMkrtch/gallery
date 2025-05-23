@@ -14,14 +14,14 @@ export default function RecentArtGrid() {
         Recent Artworks
       </h2>
 
-      <div className="grid grid-cols-2 place-items-center gap-5 md:grid-cols-3">
+      <div className="grid place-items-center gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-3 2xl:gap-5">
         {artworks.map((artwork) => {
           return (
             <div
               key={artwork}
-              className="bg-foreground/[0.02] flex items-center justify-center rounded p-5 select-none md:h-[370px] md:w-[395px]"
+              className="flex aspect-[5/4] w-full items-center justify-center rounded bg-neutral-100 p-5 shadow-xs select-none"
             >
-              <div className="flex size-full items-center justify-center bg-neutral-200">
+              <div className="flex size-full items-center justify-center bg-neutral-300">
                 <p>{artwork}</p>
               </div>
             </div>

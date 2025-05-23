@@ -50,6 +50,6 @@
   }
 
   .carousel-item {
-    @apply mx-auto aspect-[21/9] rounded-md object-cover;
+    @apply mx-auto rounded-md object-cover;
   }
 }

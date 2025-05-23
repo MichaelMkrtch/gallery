@@ -30,7 +30,10 @@ export default function ArtistsCarousel() {
         <CarouselContent>
           {artists.map((artist) => {
             return (
-              <CarouselItem key={artist} className="w-fit xl:basis-1/4">
+              <CarouselItem
+                key={artist}
+                className="w-fit basis-1/2 md:basis-1/3 lg:basis-1/4"
+              >
                 {/* <Image
                   src={artist}
                   alt="demo image"
@@ -38,7 +41,7 @@ export default function ArtistsCarousel() {
                   height="1080"
                   className="carousel-item"
                 /> */}
-                <div className="flex h-[394px] w-[296px] items-center justify-center rounded-md bg-neutral-200 select-none">
+                <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-neutral-200 select-none">
                   <p>{artist}</p>
                 </div>
               </CarouselItem>
@@ -47,11 +50,11 @@ export default function ArtistsCarousel() {
         </CarouselContent>
         <CarouselPrevious
           variant="outline"
-          className="group/artists animate-fade-in absolute left-2 hidden group-hover/artists:flex"
+          className="group/artists animate-fade-in absolute left-1 md:left-2 lg:hidden lg:group-hover/artists:flex"
         />
         <CarouselNext
           variant="outline"
-          className="group/artists animate-fade-in absolute right-4 hidden group-hover/artists:flex"
+          className="group/artists animate-fade-in absolute right-1 md:right-2 lg:hidden lg:group-hover/artists:flex"
         />
       </Carousel>
     </section>

@@ -4,10 +4,10 @@ import RecentArtGrid from "@/features/home/components/RecentArtGrid";
 
 export default function Home() {
   return (
-    <main>
+    <main className="animate-fade-in">
       <OverviewCarousel />
 
-      <section className="mt-8 mb-8 md:mt-12">
+      <section className="mt-8 mb-8 md:mt-10">
         <h2 className="mb-2 text-center text-xl font-semibold tracking-tight">
           Welcome to the Agajanian Gallery
         </h2>

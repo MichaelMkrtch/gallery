@@ -1,6 +1,6 @@
-import ArtistsCarousel from "@/features/home/components/ArtistsCarousel";
-import OverviewCarousel from "@/features/home/components/OverviewCarousel";
-import RecentArtGrid from "@/features/home/components/RecentArtGrid";
+import ArtworksGrid from "@/components/artworks-grid";
+import ArtistsCarousel from "@/features/home/components/artists-carousel";
+import OverviewCarousel from "@/features/home/components/overview-carousel";
 
 export default function Home() {
   return (
@@ -21,7 +21,12 @@ export default function Home() {
 
       <ArtistsCarousel />
 
-      <RecentArtGrid />
+      <section className="my-14">
+        <h2 className="text-primary mb-4 text-2xl tracking-tighter">
+          Recent Artworks
+        </h2>
+        <ArtworksGrid />
+      </section>
     </main>
   );
 }

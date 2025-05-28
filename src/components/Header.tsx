@@ -32,6 +32,9 @@ export default function Header() {
           of a list and the number of list items. */}
         <ul className="hidden justify-around gap-4 tracking-tight md:flex lg:text-lg">
           <li className="navlink">
+            <Link href="/">Home</Link>
+          </li>
+          <li className="navlink">
             <Link href="/artists">Artists</Link>
           </li>
           <li className="navlink">

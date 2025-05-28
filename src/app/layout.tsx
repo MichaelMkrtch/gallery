@@ -4,8 +4,8 @@ import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",

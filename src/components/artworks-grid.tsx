@@ -7,13 +7,9 @@ const artworks = [
   "Artwork 6",
 ];
 
-export default function RecentArtGrid() {
+export default function ArtworksGrid() {
   return (
-    <section className="animate-fade-in my-14">
-      <h2 className="text-primary mb-4 text-2xl tracking-tighter">
-        Recent Artworks
-      </h2>
-
+    <div className="animate-fade-in">
       <div className="grid place-items-center gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-3 2xl:gap-5">
         {artworks.map((artwork) => {
           return (
@@ -28,6 +24,6 @@ export default function RecentArtGrid() {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

@@ -15,7 +15,7 @@ const artists = [
 
 export default function ArtistsGrid() {
   return (
-    <section>
+    <section className="animate-fade-in">
       <div className="grid grid-cols-2 place-items-center gap-3 lg:grid-cols-3 lg:gap-3 2xl:gap-5">
         {artists.map((artist) => {
           return (

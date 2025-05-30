@@ -3,7 +3,7 @@ import PageHeader from "@/components/page-header";
 
 export default function ArtworksPage() {
   return (
-    <main>
+    <main className="mb-8 pb-4">
       <PageHeader title="Artworks" description="Artworks Page" />
 
       <section>

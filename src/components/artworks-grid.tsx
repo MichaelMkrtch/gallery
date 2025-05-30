@@ -1,72 +1,53 @@
 "use client";
 
-import type {
-  GetCollectionWithProductsQuery,
-  GetCollectionWithProductsQueryVariables,
-} from "../graphql/generated/graphql";
+import type { Product } from "@/types/products";
 
 import Image from "next/image";
 
-import { GetCollectionWithProductsDocument } from "../graphql/generated/graphql";
-import { useQuery } from "@apollo/client";
+import { formatNumber } from "@/lib/utils";
 
-export default function ArtworksGrid() {
-  const { loading, error, data, fetchMore } = useQuery<
-    GetCollectionWithProductsQuery,
-    GetCollectionWithProductsQueryVariables
-  >(GetCollectionWithProductsDocument, {
-    variables: {
-      collectionHandle: "Paintings",
-    },
-    fetchPolicy: "cache-first",
-  });
+import { BagIcon } from "./icons/BagIcon";
 
-  if (loading && !data) {
-    // TODO: loading state if there is no data
-    return <p>Loading products...</p>;
-  }
+type ArtworksGridProps = {
+  products: Product[];
+};
 
-  if (error) {
-    console.error("ProductList Error:", JSON.stringify(error, null, 2));
-    // TODO: customize the error object before throwing
-    throw error;
-  }
-
-  const products = data?.collection?.products.edges;
-  const pageInfo = data?.collection?.products?.pageInfo;
-
-  if (!products || products.length === 0) {
-    return <p>No products found.</p>;
-  }
-
-  const handleLoadMore = () => {
-    if (pageInfo?.hasNextPage && pageInfo.endCursor) {
-      fetchMore({
-        variables: {
-          after: pageInfo.endCursor,
-        },
-        // TODO: might need an updateQuery function here if cache doesn't
-        // merge paginated results correctly.
-      });
-    }
-  };
-
+export default function ArtworksGrid({ products }: ArtworksGridProps) {
   return (
-    <div className="animate-fade-in">
-      <div className="grid place-items-center gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-3 2xl:gap-5">
+    <div className="animate-fade-in mb-8 pb-4">
+      <div className="grid place-items-center gap-3 lg:grid-cols-3 lg:gap-4 2xl:gap-5">
         {products.map((product) => {
+          const mainImage = product.images[0];
+          const price = formatNumber(product.price);
+
           return (
-            <div
-              key={product.cursor}
-              className="flex aspect-[5/4] w-full items-center justify-center rounded bg-neutral-100 p-5 shadow-xs select-none"
-            >
-              <div className="flex size-full items-center justify-center bg-neutral-300">
+            <div key={product.cursor} className="group hover:cursor-pointer">
+              <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs select-none">
                 <Image
-                  src={product.node.images.edges[0].node.url}
-                  alt={product.node.images.edges[0].node.altText ?? ""}
-                  width={product.node.images.edges[0].node.width ?? "1920"}
-                  height={product.node.images.edges[0].node.height ?? "1080"}
+                  src={mainImage.url}
+                  alt={mainImage.altText ?? ""}
+                  width={mainImage.width ?? "1920"}
+                  height={mainImage.height ?? "1080"}
+                  className="max-h-full max-w-full object-contain"
                 />
+              </div>
+
+              <div className="mt-5 flex flex-col">
+                <h3 className="text-lg">{product.title}</h3>
+
+                <span className="font-normal">
+                  {product.artist} | PRODUCT TYPE
+                </span>
+
+                <div className="my-1 flex items-center justify-start gap-1 font-normal">
+                  <span>{price}</span>
+                  <span>{product.currencyCode}</span>
+                </div>
+
+                <div className="flex w-fit items-center gap-1 text-blue-900 duration-100 ease-in hover:text-blue-700">
+                  <BagIcon classes="size-5" />
+                  <span>Add to bag</span>
+                </div>
               </div>
             </div>
           );

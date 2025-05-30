@@ -29,7 +29,7 @@ export default function OverviewCarousel() {
 
   const autoplayPlugin = useRef(
     Autoplay({
-      delay: 6000,
+      delay: 4000,
       stopOnInteraction: true,
     }),
   );
@@ -79,6 +79,7 @@ export default function OverviewCarousel() {
                   width="1920"
                   height="1080"
                   className="carousel-item aspect-[16/9] md:aspect-[21/9]"
+                  priority
                 />
               </CarouselItem>
             );

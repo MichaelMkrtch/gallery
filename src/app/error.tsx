@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-interface ErrorProps {
+type ErrorProps = {
   error: Error & { digest?: string };
   reset: () => void;
-}
+};
 
 export default function GlobalError({ error, reset }: ErrorProps) {
   useEffect(() => {

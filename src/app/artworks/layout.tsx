@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import PageHeader from "@/components/page-header";
 import {
@@ -18,7 +19,13 @@ import { useAllCollections } from "@/hooks/useAllCollections";
 
 import { ArrowDown, ArrowDownUp, ArrowUp, ListFilter } from "lucide-react";
 
+type SortBy = "newest" | "oldest" | "price-low" | "price-high" | undefined;
+
 export default function ArtworksLayout({ children }: { children: ReactNode }) {
+  const searchParams = useSearchParams();
+  const sortBy = searchParams.get("sort-by") as SortBy;
+  const queryParam = sortBy ? `?sort-by=${sortBy}` : "";
+
   const { collections, loading, error } = useAllCollections();
 
   if (error) {
@@ -54,12 +61,12 @@ export default function ArtworksLayout({ children }: { children: ReactNode }) {
             </DropdownMenuLabel>
             <DropdownMenuGroup className="space-y-0.25">
               <DropdownMenuItem>
-                <Link href="/artworks">All Artworks</Link>
+                <Link href={`/artworks${queryParam}`}>All Artworks</Link>
               </DropdownMenuItem>
               {collections.map((collection) => {
                 return (
                   <DropdownMenuItem key={collection.id}>
-                    <Link href={`/artworks/${collection.handle}`}>
+                    <Link href={`/artworks/${collection.handle}${queryParam}`}>
                       {collection.title}
                     </Link>
                   </DropdownMenuItem>

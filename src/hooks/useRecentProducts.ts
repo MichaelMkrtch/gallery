@@ -21,7 +21,7 @@ export function useRecentProducts(): UseRecentProductsResult {
     GetRecentProductsQueryVariables
   >(GetRecentProductsDocument, {
     variables: {},
-    fetchPolicy: "cache-first",
+    fetchPolicy: "cache-and-network",
   });
 
   if (error) {

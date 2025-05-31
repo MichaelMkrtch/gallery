@@ -10,6 +10,8 @@
   --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-geist-mono);
 
+  --animate-fade-in: fade-in 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+
   @keyframes fade-in {
     0% {
       opacity: 0;
@@ -41,6 +43,10 @@
 @layer components {
   .navlink {
     @apply hover:text-primary transition-colors duration-150;
+  }
+
+  .dropdown-link {
+    @apply flex items-center justify-center gap-1;
   }
 
   .carousel-container {

@@ -2,18 +2,23 @@
 
 import type { Product } from "@/types/products";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import ArtworksGrid from "@/components/artworks-grid";
-import { useAllArtwork } from "@/hooks/useAllArtwork";
+import { useCollectionProducts } from "@/hooks/useCollectionProducts";
 
 type SortBy = "newest" | "oldest" | "price-low" | "price-high" | undefined;
 
-export default function AllArtworksPage() {
+export default function GenrePage() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const segments = pathname.split("/").filter(Boolean);
+  const collectionHandle = segments[segments.length - 1] || "";
+
   const sortBy = searchParams.get("sort-by") as SortBy;
 
-  const { products, loading, error } = useAllArtwork();
+  const { products, loading, error } = useCollectionProducts(collectionHandle);
 
   if (loading) {
     return <p>Loading artwork...</p>; // Or a Skeleton Loader

@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 import Link from "next/link";
@@ -12,18 +14,64 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAllCollections } from "@/hooks/useAllCollections";
 
-import { ArrowDown, ArrowDownUp, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowDownUp, ArrowUp, ListFilter } from "lucide-react";
 
 export default function ArtworksLayout({ children }: { children: ReactNode }) {
-  return (
-    <div>
-      <PageHeader title="Artworks" description={"all artwork"} />
+  const { collections, loading, error } = useAllCollections();
 
-      <div className="flex items-center justify-end">
+  if (error) {
+    throw error;
+  }
+
+  if (loading) {
+    return <p>Collections loading...</p>;
+  }
+
+  if (!collections || collections.length === 0) {
+    return <p>No collections found.</p>;
+  }
+
+  return (
+    <div className="mb-10">
+      <PageHeader title="Artworks" />
+
+      <aside className="mb-2 flex items-center justify-end gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="group relative rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
+            <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
+              <span className="flex items-center justify-center gap-1 text-neutral-700 active:translate-y-px">
+                <ListFilter size={18} />
+                Filter
+              </span>
+            </button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="bg-background border-neutral-200">
+            <DropdownMenuLabel className="text-base">
+              Filter by
+            </DropdownMenuLabel>
+            <DropdownMenuGroup className="space-y-0.25">
+              <DropdownMenuItem>
+                <Link href="/artworks">All Artworks</Link>
+              </DropdownMenuItem>
+              {collections.map((collection) => {
+                return (
+                  <DropdownMenuItem key={collection.id}>
+                    <Link href={`/artworks/${collection.handle}`}>
+                      {collection.title}
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
               <span className="flex items-center justify-center gap-1 text-neutral-700 active:translate-y-px">
                 <ArrowDownUp size={18} />
                 Sort
@@ -32,41 +80,48 @@ export default function ArtworksLayout({ children }: { children: ReactNode }) {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent className="bg-background border-neutral-200">
-            <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-            <DropdownMenuGroup>
-              <Link href="/artworks?sort-by=oldest">
-                <DropdownMenuItem>
+            <DropdownMenuLabel className="text-base">Sort by</DropdownMenuLabel>
+            <DropdownMenuGroup className="space-y-0.25">
+              <DropdownMenuItem>
+                <Link href="/artworks?sort-by=oldest" className="dropdown-link">
                   <ArrowUp size={16} />
                   Oldest first
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/artworks?sort-by=newest">
-                <DropdownMenuItem>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/artworks?sort-by=newest" className="dropdown-link">
                   <ArrowDown size={16} />
                   Newest first
-                </DropdownMenuItem>
-              </Link>
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuGroup>
-              <Link href="/artworks?sort-by=price-low">
-                <DropdownMenuItem>
+            <DropdownMenuGroup className="space-y-0.25">
+              <DropdownMenuItem>
+                <Link
+                  href="/artworks?sort-by=price-low"
+                  className="dropdown-link"
+                >
                   <ArrowUp size={16} />
                   Price: low to high
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/artworks?sort-by=price-high">
-                <DropdownMenuItem>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href="/artworks?sort-by=price-high"
+                  className="dropdown-link"
+                >
                   <ArrowDown size={16} />
                   Price: high to low
-                </DropdownMenuItem>
-              </Link>
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </aside>
+
       {children}
     </div>
   );

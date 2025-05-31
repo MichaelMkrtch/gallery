@@ -1,7 +1,15 @@
-# query GetCollections(
-# ) {
-
-# }
+query GetAllCollections {
+  collections(first: 10) {
+    edges {
+      node {
+        id
+        handle
+        title
+      }
+      cursor
+    }
+  }
+}
 
 query GetCollectionWithProducts(
   $collectionHandle: String!

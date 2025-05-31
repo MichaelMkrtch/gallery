@@ -8,8 +8,6 @@ const storefrontAccessToken = process.env
 const apiVersion = process.env.NEXT_PUBLIC_API_VERSION as string;
 
 if (!storeDomain || !storefrontAccessToken) {
-  console.log(storeDomain);
-  console.log(storefrontAccessToken);
   throw new Error(
     "Something went wrong while connecting to our gallery! Please try again later.",
   );

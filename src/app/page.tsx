@@ -9,7 +9,7 @@ export default function Home() {
   const { products, loading, error } = useRecentProducts();
 
   if (loading) {
-    return <p>Loading recent products...</p>; // Or a Skeleton Loader
+    return <p>Loading recent artwork...</p>; // Or a Skeleton Loader
   }
 
   if (error) {
@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   if (!products || products.length === 0) {
-    return <p>No recent products found.</p>;
+    return <p>No recent artwork found.</p>;
   }
 
   return (

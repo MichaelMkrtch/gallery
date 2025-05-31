@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-background/80 rounded-tl-xl rounded-tr-xl border border-b-0 border-neutral-200 px-2 pb-4 drop-shadow-xs md:max-w-full md:rounded-tl-3xl md:rounded-tr-3xl md:px-10 md:pb-6 lg:max-w-6xl 2xl:max-w-7xl">
+    <footer className="bg-background/80 rounded-tl-xl rounded-tr-xl border border-b-0 border-neutral-200 px-2 pb-4 drop-shadow-xs md:max-w-full md:rounded-tl-3xl md:rounded-tr-3xl md:px-10 md:pb-6 lg:max-w-7xl">
       <div className="mx-auto mt-4 flex items-center justify-center">
         <Image
           src="/logo-gold-2.png"

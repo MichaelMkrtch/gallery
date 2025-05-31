@@ -21,7 +21,7 @@ export function useAllArtwork(): UseAllArtworksResult {
     GetAllProductsQueryVariables
   >(GetAllProductsDocument, {
     variables: {},
-    fetchPolicy: "cache-first",
+    fetchPolicy: "cache-and-network",
   });
 
   if (error) {

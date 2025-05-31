@@ -60,16 +60,17 @@ export default function ArtworksLayout({ children }: { children: ReactNode }) {
               Filter by
             </DropdownMenuLabel>
             <DropdownMenuGroup className="space-y-0.25">
-              <DropdownMenuItem>
-                <Link href={`/artworks${queryParam}`}>All Artworks</Link>
-              </DropdownMenuItem>
+              <Link href={`/artworks${queryParam}`}>
+                <DropdownMenuItem>All Artworks</DropdownMenuItem>
+              </Link>
               {collections.map((collection) => {
                 return (
-                  <DropdownMenuItem key={collection.id}>
-                    <Link href={`/artworks/${collection.handle}${queryParam}`}>
-                      {collection.title}
-                    </Link>
-                  </DropdownMenuItem>
+                  <Link
+                    key={collection.id}
+                    href={`/artworks/${collection.handle}${queryParam}`}
+                  >
+                    <DropdownMenuItem>{collection.title}</DropdownMenuItem>
+                  </Link>
                 );
               })}
             </DropdownMenuGroup>

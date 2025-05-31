@@ -1,4 +1,12 @@
-query GetProducts($first: Int = 12, $after: String) {
+query GetAllProducts(
+  $first: Int = 12
+  $after: String
+  $imagesFirst: Int = 1
+  $artistNamespace: String = "custom"
+  $artistKey: String = "artist"
+  $genreNamespace: String = "custom"
+  $genreKey: String = "genre"
+) {
   products(first: $first, after: $after) {
     pageInfo {
       hasNextPage
@@ -10,12 +18,16 @@ query GetProducts($first: Int = 12, $after: String) {
         id
         title
         handle
+        createdAt
         descriptionHtml
-        images(first: 1) {
+        images(first: $imagesFirst) {
           edges {
             node {
+              id
               url
               altText
+              width
+              height
             }
           }
         }
@@ -25,12 +37,13 @@ query GetProducts($first: Int = 12, $after: String) {
             currencyCode
           }
         }
-        variants(first: 1) {
-          edges {
-            node {
-              id
-            }
-          }
+        artist: metafield(namespace: $artistNamespace, key: $artistKey) {
+          value
+          type
+        }
+        genre: metafield(namespace: $genreNamespace, key: $genreKey) {
+          value
+          type
         }
       }
     }

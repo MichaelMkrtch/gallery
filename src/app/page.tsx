@@ -20,8 +20,6 @@ export default function Home() {
     return <p>No recent products found.</p>;
   }
 
-  console.dir(products);
-
   return (
     <main className="animate-fade-in">
       <OverviewCarousel />

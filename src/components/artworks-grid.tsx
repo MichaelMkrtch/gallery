@@ -22,7 +22,7 @@ export default function ArtworksGrid({ products }: ArtworksGridProps) {
 
           return (
             <div key={product.cursor} className="group hover:cursor-pointer">
-              <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs select-none">
+              <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs inset-shadow-sm transition-colors duration-100 ease-in select-none group-hover:bg-neutral-200/50">
                 <Image
                   src={mainImage.url}
                   alt={mainImage.altText ?? ""}

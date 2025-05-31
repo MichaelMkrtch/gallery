@@ -49,7 +49,7 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="bg-background relative hidden items-center justify-center rounded-full border-1 border-neutral-200 shadow-sm md:flex lg:w-60 2xl:w-[270px]">
+      <div className="bg-background relative hidden items-center justify-center rounded-full border-1 border-neutral-200 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 md:flex lg:w-60 2xl:w-[270px]">
         <Search size="20" className="ml-2 text-neutral-500" />
         <Input
           className="h-9 w-full border-none font-semibold shadow-none placeholder:font-medium placeholder:text-neutral-400 focus-visible:ring-0"

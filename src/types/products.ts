@@ -17,4 +17,5 @@ export type Product = {
   currencyCode: CurrencyCode;
   artist: string | undefined;
   genre: string | undefined;
+  createdAt: Date;
 };

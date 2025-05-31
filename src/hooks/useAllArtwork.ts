@@ -51,11 +51,12 @@ export function useAllArtwork(): UseAllArtworksResult {
       title: product.title,
       handle: product.handle,
       descriptionHtml: product.descriptionHtml,
-      images,
-      price: product.priceRange.minVariantPrice.amount as string,
-      currencyCode: product.priceRange.minVariantPrice.currencyCode,
       artist: product.artist?.value,
       genre: product.genre?.value,
+      price: product.priceRange.minVariantPrice.amount as string,
+      currencyCode: product.priceRange.minVariantPrice.currencyCode,
+      images,
+      createdAt: product.createdAt,
     };
 
     return formattedProduct;

@@ -5,6 +5,7 @@ import type {
 import type { Product } from "@/types/products";
 
 import { GetAllProductsDocument } from "@/graphql/generated/graphql";
+import { formatProducts } from "@/lib/utils";
 
 import { useQuery } from "@apollo/client";
 
@@ -30,37 +31,7 @@ export function useAllArtwork(): UseAllArtworksResult {
     );
   }
 
-  const products = data?.products.edges.map((edge) => {
-    const product = edge.node;
-
-    const images = product.images.edges.map((edge) => {
-      const image = edge.node;
-
-      return {
-        id: image.id,
-        url: image.url,
-        altText: image.altText,
-        width: image.width,
-        height: image.height,
-      };
-    });
-
-    const formattedProduct = {
-      cursor: edge.cursor,
-      id: product.id,
-      title: product.title,
-      handle: product.handle,
-      descriptionHtml: product.descriptionHtml,
-      artist: product.artist?.value,
-      genre: product.genre?.value,
-      price: product.priceRange.minVariantPrice.amount as string,
-      currencyCode: product.priceRange.minVariantPrice.currencyCode,
-      images,
-      createdAt: product.createdAt,
-    };
-
-    return formattedProduct;
-  });
+  const products = formatProducts(data);
 
   return {
     products,

@@ -15,7 +15,49 @@ export type Product = {
   }[];
   price: string;
   currencyCode: CurrencyCode;
-  artist: string | undefined;
-  genre: string | undefined;
-  createdAt: Date;
+  artist?: string | null;
+  genre?: string | null;
+  createdAt: string;
+};
+
+export type RawGraphQLProductNode = {
+  __typename?: "Product";
+  id: string;
+  title: string;
+  handle: string;
+  descriptionHtml: string;
+  images: {
+    __typename?: "ImageConnection";
+    edges: Array<{
+      __typename?: "ImageEdge";
+      node: {
+        __typename?: "Image";
+        id?: string | null;
+
+        url: string;
+        altText?: string | null;
+        width?: number | null;
+        height?: number | null;
+      };
+    } | null>;
+  };
+  priceRange: {
+    __typename?: "ProductPriceRange";
+    minVariantPrice: {
+      __typename?: "MoneyV2";
+      amount: string;
+      currencyCode: CurrencyCode;
+    };
+  };
+  createdAt: string;
+  artist?: {
+    __typename?: "Metafield";
+    value?: string | null;
+    type?: string;
+  } | null;
+  genre?: {
+    __typename?: "Metafield";
+    value?: string | null;
+    type?: string;
+  } | null;
 };

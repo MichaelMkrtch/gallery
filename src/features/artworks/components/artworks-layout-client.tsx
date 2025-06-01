@@ -12,7 +12,6 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAllCollections } from "@/hooks/useAllCollections";
@@ -20,6 +19,29 @@ import { useAllCollections } from "@/hooks/useAllCollections";
 import { ArrowDown, ArrowDownUp, ArrowUp, ListFilter } from "lucide-react";
 
 type SortBy = "newest" | "oldest" | "price-low" | "price-high" | undefined;
+
+const sortOptions = [
+  {
+    text: "Oldest first",
+    queryParam: "oldest" as const,
+    icon: <ArrowUp size={16} />,
+  },
+  {
+    text: "Newest first",
+    queryParam: "newest" as SortBy,
+    icon: <ArrowDown size={16} />,
+  },
+  {
+    text: "Price: low to high",
+    queryParam: "price-low" as SortBy,
+    icon: <ArrowUp size={16} />,
+  },
+  {
+    text: "Price: high to low",
+    queryParam: "price-high" as SortBy,
+    icon: <ArrowDown size={16} />,
+  },
+];
 
 export default function ArtworksLayoutClient({
   children,
@@ -63,9 +85,11 @@ export default function ArtworksLayoutClient({
             <DropdownMenuLabel className="text-base">
               Filter by
             </DropdownMenuLabel>
-            <DropdownMenuGroup className="space-y-0.25">
+            <DropdownMenuGroup className="w-full space-y-0.25">
               <Link href={`/artworks${queryParam}`}>
-                <DropdownMenuItem>All Artworks</DropdownMenuItem>
+                <DropdownMenuItem className="dropdown-link">
+                  All Artworks
+                </DropdownMenuItem>
               </Link>
               {collections.map((collection) => {
                 return (
@@ -73,7 +97,9 @@ export default function ArtworksLayoutClient({
                     key={collection.id}
                     href={`/artworks/${collection.handle}${queryParam}`}
                   >
-                    <DropdownMenuItem>{collection.title}</DropdownMenuItem>
+                    <DropdownMenuItem className="dropdown-link">
+                      {collection.title}
+                    </DropdownMenuItem>
                   </Link>
                 );
               })}
@@ -94,41 +120,19 @@ export default function ArtworksLayoutClient({
           <DropdownMenuContent className="bg-background border-neutral-200">
             <DropdownMenuLabel className="text-base">Sort by</DropdownMenuLabel>
             <DropdownMenuGroup className="space-y-0.25">
-              <DropdownMenuItem>
-                <Link href="/artworks?sort-by=oldest" className="dropdown-link">
-                  <ArrowUp size={16} />
-                  Oldest first
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/artworks?sort-by=newest" className="dropdown-link">
-                  <ArrowDown size={16} />
-                  Newest first
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuGroup className="space-y-0.25">
-              <DropdownMenuItem>
-                <Link
-                  href="/artworks?sort-by=price-low"
-                  className="dropdown-link"
-                >
-                  <ArrowUp size={16} />
-                  Price: low to high
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href="/artworks?sort-by=price-high"
-                  className="dropdown-link"
-                >
-                  <ArrowDown size={16} />
-                  Price: high to low
-                </Link>
-              </DropdownMenuItem>
+              {sortOptions.map((option) => {
+                return (
+                  <Link
+                    key={option.text}
+                    href={`/artworks?sort-by=${option.queryParam}`}
+                  >
+                    <DropdownMenuItem className="dropdown-link">
+                      {option.icon}
+                      {option.text}
+                    </DropdownMenuItem>
+                  </Link>
+                );
+              })}
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

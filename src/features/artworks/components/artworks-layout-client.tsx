@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import PageHeader from "@/components/page-header";
 import {
@@ -48,7 +48,12 @@ export default function ArtworksLayoutClient({
 }: {
   children: ReactNode;
 }) {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const segments = pathname.split("/").filter(Boolean);
+  const collectionHandle = segments[segments.length - 1] || "";
+
   const sortBy = searchParams.get("sort-by") as SortBy;
   const queryParam = sortBy ? `?sort-by=${sortBy}` : "";
 
@@ -71,6 +76,7 @@ export default function ArtworksLayoutClient({
       <PageHeader title="Artworks" />
 
       <aside className="mb-2 flex items-center justify-end gap-2">
+        {/* Filter Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
@@ -87,7 +93,9 @@ export default function ArtworksLayoutClient({
             </DropdownMenuLabel>
             <DropdownMenuGroup className="w-full space-y-0.25">
               <Link href={`/artworks${queryParam}`}>
-                <DropdownMenuItem className="dropdown-link">
+                <DropdownMenuItem
+                  className={`${collectionHandle === "artworks" ? "bg-neutral-200 focus:bg-neutral-300" : ""} dropdown-link`}
+                >
                   All Artworks
                 </DropdownMenuItem>
               </Link>
@@ -95,9 +103,11 @@ export default function ArtworksLayoutClient({
                 return (
                   <Link
                     key={collection.id}
-                    href={`/artworks/${collection.handle}${queryParam}`}
+                    href={`/artworks/genres/${collection.handle}${queryParam}`}
                   >
-                    <DropdownMenuItem className="dropdown-link">
+                    <DropdownMenuItem
+                      className={`${collectionHandle === collection.handle ? "bg-neutral-200 focus:bg-neutral-300" : ""} dropdown-link`}
+                    >
                       {collection.title}
                     </DropdownMenuItem>
                   </Link>
@@ -107,6 +117,7 @@ export default function ArtworksLayoutClient({
           </DropdownMenuContent>
         </DropdownMenu>
 
+        {/* Sort Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
@@ -126,7 +137,9 @@ export default function ArtworksLayoutClient({
                     key={option.text}
                     href={`/artworks?sort-by=${option.queryParam}`}
                   >
-                    <DropdownMenuItem className="dropdown-link">
+                    <DropdownMenuItem
+                      className={`${sortBy === option.queryParam ? "bg-neutral-200 focus:bg-neutral-300" : ""} dropdown-link`}
+                    >
                       {option.icon}
                       {option.text}
                     </DropdownMenuItem>

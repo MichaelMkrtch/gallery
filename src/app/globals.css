@@ -46,7 +46,7 @@
   }
 
   .dropdown-link {
-    @apply flex cursor-pointer items-center justify-start gap-1;
+    @apply my-0.25 flex cursor-pointer items-center justify-start gap-1;
   }
 
   .carousel-container {

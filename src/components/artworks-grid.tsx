@@ -3,6 +3,7 @@
 import type { Product } from "@/types/products";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { formatNumber } from "@/lib/utils";
 
@@ -22,33 +23,35 @@ export default function ArtworksGrid({ products }: ArtworksGridProps) {
 
           return (
             <div key={product.cursor} className="group hover:cursor-pointer">
-              <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs inset-shadow-sm transition-colors duration-100 ease-in select-none group-hover:bg-neutral-200/50">
-                <Image
-                  src={mainImage.url}
-                  alt={mainImage.altText ?? ""}
-                  width={mainImage.width ?? "1920"}
-                  height={mainImage.height ?? "1080"}
-                  className="max-h-full max-w-full object-contain"
-                />
-              </div>
-
-              <div className="mt-5 flex flex-col">
-                <h3 className="text-lg">{product.title}</h3>
-
-                <span className="font-normal">
-                  {product.artist} | PRODUCT TYPE
-                </span>
-
-                <div className="my-1 flex items-center justify-start gap-1 font-normal">
-                  <span>{price}</span>
-                  <span>{product.currencyCode}</span>
+              <Link href={`/artworks/${product.handle}`}>
+                <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs inset-shadow-sm transition-colors duration-100 ease-in select-none group-hover:bg-neutral-200/50">
+                  <Image
+                    src={mainImage.url}
+                    alt={mainImage.altText ?? ""}
+                    width={mainImage.width ?? "1920"}
+                    height={mainImage.height ?? "1080"}
+                    className="max-h-full max-w-full object-contain"
+                  />
                 </div>
 
-                <div className="flex w-fit items-center gap-1 text-blue-900 duration-100 ease-in hover:text-blue-700">
-                  <BagIcon classes="size-5" />
-                  <span>Add to bag</span>
+                <div className="mt-5 flex flex-col">
+                  <h3 className="text-lg">{product.title}</h3>
+
+                  <span className="font-normal">
+                    {product.artist} | PRODUCT TYPE
+                  </span>
+
+                  <div className="my-1 flex items-center justify-start gap-1 font-normal">
+                    <span>{price}</span>
+                    <span>{product.currencyCode}</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
+
+              <button className="flex w-fit cursor-pointer items-center gap-1 text-blue-900 duration-100 ease-in outline-none hover:text-blue-700">
+                <BagIcon classes="size-5" />
+                <span>Add to bag</span>
+              </button>
             </div>
           );
         })}

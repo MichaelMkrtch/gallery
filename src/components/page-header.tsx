@@ -15,7 +15,7 @@ export default function PageHeader({ title }: { title: string }) {
   useEffect(() => {
     if (collections) {
       const collectionMatch = collections.find(
-        (collection) => `/artworks/${collection.handle}` === pathname,
+        (collection) => `/artworks/genres/${collection.handle}` === pathname,
       ) ?? { title: "All Artworks" };
 
       setCollectionName(collectionMatch.title);

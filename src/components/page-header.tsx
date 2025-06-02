@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 
 import { useAllCollections } from "@/hooks/useAllCollections";
 
-export default function PageHeader({ title }: { title: string }) {
+type PageHeaderProps = {
+  title: string;
+  description?: string;
+};
+
+export default function PageHeader({ title, description }: PageHeaderProps) {
   const [collectionName, setCollectionName] = useState("");
 
   const pathname = usePathname();
@@ -37,7 +42,9 @@ export default function PageHeader({ title }: { title: string }) {
   return (
     <div className="mb-8 pt-4">
       <h2 className="text-primary mb-1 text-3xl tracking-tighter">{title}</h2>
-      <span className="text-xl">{collectionName}</span>
+      <span className="text-xl">
+        {description ? description : collectionName}
+      </span>
     </div>
   );
 }

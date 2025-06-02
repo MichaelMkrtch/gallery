@@ -59,6 +59,15 @@ export default function ArtworksLayoutClient({
 
   const { collections, loading, error } = useAllCollections();
 
+  const isDetailPage =
+    /^\/artworks\/[^/]+$/.test(pathname) &&
+    !pathname.startsWith("/artworks/genres/");
+
+  if (isDetailPage) {
+    // Do NOT render the layout for /artworks/[slug]
+    return <>{children}</>;
+  }
+
   if (error) {
     throw error;
   }
@@ -80,7 +89,7 @@ export default function ArtworksLayoutClient({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
-              <span className="flex items-center justify-center gap-1 text-neutral-700 active:translate-y-px">
+              <span className="flex items-center justify-center gap-1 active:translate-y-px">
                 <ListFilter size={18} />
                 Filter
               </span>
@@ -121,7 +130,7 @@ export default function ArtworksLayoutClient({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
-              <span className="flex items-center justify-center gap-1 text-neutral-700 active:translate-y-px">
+              <span className="flex items-center justify-center gap-1 active:translate-y-px">
                 <ArrowDownUp size={18} />
                 Sort
               </span>

@@ -1,0 +1,64 @@
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
+
+import PageHeader from "@/components/page-header";
+import ArtworkCarousel from "@/features/artworks/components/artwork-carousel";
+import { useProduct } from "@/hooks/useProduct";
+
+import { ArrowLeft } from "lucide-react";
+
+export default function ArtworkPage() {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const segments = pathname.split("/").filter(Boolean);
+  const productHandle = segments[segments.length - 1] || "";
+
+  const { product: productArray, loading, error } = useProduct(productHandle);
+
+  if (loading) {
+    return <p>Loading artwork...</p>; // Or a Skeleton Loader
+  }
+
+  if (error) {
+    throw error;
+  }
+
+  if (!productArray || productArray.length === 0) {
+    return <p>No artwork found.</p>;
+  }
+
+  const product = productArray[0];
+  const dimensions = product.dimensions?.match(/^(.*in )(.+)$/);
+
+  return (
+    <main>
+      <PageHeader title={product.title} description={`by ${product.artist}`} />
+
+      <button
+        onClick={() => router.back()}
+        className="mb-4 rounded-full border border-neutral-200 p-1 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:inset-shadow-xs"
+      >
+        <ArrowLeft
+          size={20}
+          className="text-foreground cursor-pointer transition-colors duration-100 active:translate-y-px"
+        />
+      </button>
+
+      <section className="grid grid-cols-[800px_1fr] gap-6">
+        <ArtworkCarousel images={product.images} />
+
+        <div>
+          <p>Type: {product.type}</p>
+          <p>Medium: {product.medium}</p>
+          {dimensions && (
+            <p>
+              Dimensions: {dimensions[1]} | {dimensions[2]}
+            </p>
+          )}
+        </div>
+      </section>
+    </main>
+  );
+}

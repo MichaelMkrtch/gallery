@@ -2,21 +2,27 @@
 
 import type { Product } from "@/types/products";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
-import ArtworksGrid from "@/components/artworks-grid";
-import { useAllArtwork } from "@/hooks/useAllArtwork";
+import ProductsGrid from "@/components/products-grid";
+import ProductsGridSkeleton from "@/components/products-grid-skeleton";
+import { useCollectionProducts } from "@/hooks/useCollectionProducts";
 
 type SortBy = "newest" | "oldest" | "price-low" | "price-high" | undefined;
 
-export default function ArtworksPageClient() {
+export default function GenreMain() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const segments = pathname.split("/").filter(Boolean);
+  const collectionHandle = segments[segments.length - 1] || "";
+
   const sortBy = searchParams.get("sort-by") as SortBy;
 
-  const { products, loading, error } = useAllArtwork();
+  const { products, loading, error } = useCollectionProducts(collectionHandle);
 
   if (loading) {
-    return <p>Loading artwork...</p>; // Or a Skeleton Loader
+    return <ProductsGridSkeleton />;
   }
 
   if (error) {
@@ -46,9 +52,7 @@ export default function ArtworksPageClient() {
 
   return (
     <main>
-      <section>
-        <ArtworksGrid products={sortedProducts} />
-      </section>
+      <ProductsGrid products={sortedProducts} />
     </main>
   );
 }

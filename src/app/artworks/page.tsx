@@ -1,13 +1,19 @@
-"use client";
-
 import { Suspense } from "react";
 
-import ArtworksPageClient from "@/features/artworks/components/artworks-client";
+import PageHeader from "@/components/page-header";
+import ArtworksMain from "@/features/artworks/components/artworks-main";
+import ArtworksToolbar from "@/features/artworks/components/artworks-toolbar";
 
-export default function AllArtworksPage() {
+export default function ArtworksPage() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <ArtworksPageClient />
-    </Suspense>
+    <div className="mb-10">
+      <PageHeader title="Artworks" />
+
+      <ArtworksToolbar />
+
+      <Suspense>
+        <ArtworksMain />
+      </Suspense>
+    </div>
   );
 }

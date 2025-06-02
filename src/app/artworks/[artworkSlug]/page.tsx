@@ -3,7 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 
 import PageHeader from "@/components/page-header";
-import ArtworkCarousel from "@/features/artworks/components/artwork-carousel";
+import ArtworkCarousel from "@/features/artworks/components/product-page/artwork-carousel";
+import ArtworkPageSkeleton from "@/features/artworks/components/product-page/artwork-page-skeleton";
 import { useProduct } from "@/hooks/useProduct";
 
 import { ArrowLeft } from "lucide-react";
@@ -18,7 +19,7 @@ export default function ArtworkPage() {
   const { product: productArray, loading, error } = useProduct(productHandle);
 
   if (loading) {
-    return <p>Loading artwork...</p>; // Or a Skeleton Loader
+    return <ArtworkPageSkeleton />;
   }
 
   if (error) {
@@ -29,11 +30,11 @@ export default function ArtworkPage() {
     return <p>No artwork found.</p>;
   }
 
-  const product = productArray[0];
+  const product = productArray && productArray[0];
   const dimensions = product.dimensions?.match(/^(.*in )(.+)$/);
 
   return (
-    <main>
+    <div className="mb-10">
       <PageHeader title={product.title} artist={product.artist} />
 
       <button
@@ -46,7 +47,7 @@ export default function ArtworkPage() {
         />
       </button>
 
-      <section className="animate-fade-in grid grid-cols-[800px_1fr] gap-6">
+      <main className="animate-fade-in grid grid-cols-[800px_1fr] gap-6">
         <ArtworkCarousel images={product.images} />
 
         {/* Product Metafields */}
@@ -77,7 +78,7 @@ export default function ArtworkPage() {
             </button>
           </section>
         </section>
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }

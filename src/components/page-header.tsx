@@ -14,10 +14,11 @@ type PageHeaderProps = {
 
 export default function PageHeader({ title, artist }: PageHeaderProps) {
   const [collectionName, setCollectionName] = useState("");
-
   const pathname = usePathname();
 
-  const { collections, loading, error } = useAllCollections();
+  // Loading and error states are handled in main page components.
+  // They are unnecessary here since the subtitle is informational.
+  const { collections } = useAllCollections();
 
   useEffect(() => {
     if (collections) {
@@ -29,21 +30,9 @@ export default function PageHeader({ title, artist }: PageHeaderProps) {
     }
   }, [collections, pathname]);
 
-  if (error) {
-    throw error;
-  }
-
-  if (loading) {
-    return <p>Collections loading...</p>;
-  }
-
-  if (!collections || collections.length === 0) {
-    return <p>No collections found.</p>;
-  }
-
   const slug = slugifyName(artist);
 
-  const subtitleText = artist ? artist : collectionName;
+  const subtitleText = artist ? artist : (collectionName ?? "");
   const subtitleLink = artist ? `/artists/${slug}` : "";
 
   const subtitle = subtitleLink ? (
@@ -67,14 +56,15 @@ export default function PageHeader({ title, artist }: PageHeaderProps) {
   }
 
   return (
-    <div className="mb-8 pt-4">
+    <div className="mb-8 w-fit pt-4">
       <h2 className="text-primary mb-1 text-3xl tracking-tighter">{title}</h2>
-
-      {artist ? (
-        <div className="text-xl tracking-tight">by {subtitle}</div>
-      ) : (
-        subtitle
-      )}
+      <div className="min-h-7">
+        {artist ? (
+          <div className="text-xl tracking-tight">by {subtitle}</div>
+        ) : (
+          subtitle
+        )}
+      </div>
     </div>
   );
 }

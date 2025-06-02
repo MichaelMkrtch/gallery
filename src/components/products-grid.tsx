@@ -9,11 +9,11 @@ import { formatNumber, slugifyName } from "@/lib/utils";
 
 import { BagIcon } from "./icons/BagIcon";
 
-type ArtworksGridProps = {
+type ProductsGridProps = {
   products: Product[];
 };
 
-export default function ArtworksGrid({ products }: ArtworksGridProps) {
+export default function ProductsGrid({ products }: ProductsGridProps) {
   return (
     <div className="animate-fade-in mb-8 pb-4">
       <div className="grid place-items-center gap-3 lg:grid-cols-3 lg:gap-4 2xl:gap-5">

@@ -1,13 +1,15 @@
-"use client";
-
-import { Suspense } from "react";
-
-import GenrePageClient from "@/features/artworks/components/genre-client";
+import PageHeader from "@/components/page-header";
+import ArtworksToolbar from "@/features/artworks/components/artworks-toolbar";
+import GenreMain from "@/features/artworks/components/genre-main";
 
 export default function GenrePage() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <GenrePageClient />
-    </Suspense>
+    <div className="mb-10">
+      <PageHeader title="Artworks" />
+
+      <ArtworksToolbar />
+
+      <GenreMain />
+    </div>
   );
 }

@@ -1,25 +1,8 @@
-"use client";
-
-import ArtworksGrid from "@/components/artworks-grid";
 import ArtistsCarousel from "@/features/home/components/artists-carousel";
 import OverviewCarousel from "@/features/home/components/overview-carousel";
-import { useRecentProducts } from "@/hooks/useRecentProducts";
+import RecentProducts from "@/features/home/components/recent-products";
 
 export default function Home() {
-  const { products, loading, error } = useRecentProducts();
-
-  if (loading) {
-    return <p>Loading recent artwork...</p>; // Or a Skeleton Loader
-  }
-
-  if (error) {
-    throw error;
-  }
-
-  if (!products || products.length === 0) {
-    return <p>No recent artwork found.</p>;
-  }
-
   return (
     <main className="animate-fade-in">
       <OverviewCarousel />
@@ -38,12 +21,7 @@ export default function Home() {
 
       <ArtistsCarousel />
 
-      <section className="my-14">
-        <h2 className="text-primary mb-4 text-2xl tracking-tighter">
-          Recent Artworks
-        </h2>
-        <ArtworksGrid products={products} />
-      </section>
+      <RecentProducts />
     </main>
   );
 }

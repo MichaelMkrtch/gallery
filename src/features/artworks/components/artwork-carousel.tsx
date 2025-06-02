@@ -52,6 +52,7 @@ export default function ArtworkCarousel({ images }: ArtworkCarouselProps) {
 
       <Carousel
         setApi={setCarouselApi}
+        opts={{ loop: true }}
         className="aspect-[5/4] max-w-[620px] grow"
       >
         <CarouselContent>

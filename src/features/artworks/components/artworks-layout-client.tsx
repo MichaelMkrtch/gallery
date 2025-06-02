@@ -64,7 +64,7 @@ export default function ArtworksLayoutClient({
     !pathname.startsWith("/artworks/genres/");
 
   if (isDetailPage) {
-    // Do NOT render the layout for /artworks/[slug]
+    // No layout for product details page
     return <>{children}</>;
   }
 
@@ -84,7 +84,7 @@ export default function ArtworksLayoutClient({
     <div className="mb-10">
       <PageHeader title="Artworks" />
 
-      <aside className="mb-2 flex items-center justify-end gap-2">
+      <aside className="mb-4 flex items-center justify-end gap-2">
         {/* Filter Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

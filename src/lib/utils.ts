@@ -4,8 +4,37 @@ import type { ClassValue } from "clsx";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+type ProductEdge<TProductNode> = {
+  cursor: string;
+  node: TProductNode;
+};
+
+type ProductConnection<TProductNode> = {
+  edges: Array<ProductEdge<TProductNode> | null | undefined>;
+};
+
+interface DataWithConnection<TProductNode> {
+  products: ProductConnection<TProductNode> | null | undefined;
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/**
+ * Formats a string to be a URL slug. This function should only
+ * be used for simple strings without special characters.
+ * @param s - String to slugify
+ * @returns The slugified string
+ */
+export function slugifyName(s: string | null | undefined) {
+  if (!s) return "";
+
+  const lowerCased = s.toLowerCase();
+  const split = lowerCased.split(" ");
+  const joined = split.join("-");
+
+  return joined;
 }
 
 /**
@@ -43,19 +72,6 @@ export function formatNumber(
     // Fallback in case of an unexpected Intl error
     return String(num);
   }
-}
-
-type ProductEdge<TProductNode> = {
-  cursor: string;
-  node: TProductNode;
-};
-
-type ProductConnection<TProductNode> = {
-  edges: Array<ProductEdge<TProductNode> | null | undefined>;
-};
-
-interface DataWithConnection<TProductNode> {
-  products: ProductConnection<TProductNode> | null | undefined;
 }
 
 export function formatProducts<

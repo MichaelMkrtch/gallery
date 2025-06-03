@@ -1,6 +1,8 @@
 import type { Product, RawGraphQLProductNode } from "@/types/products";
 import type { ClassValue } from "clsx";
 
+import { Artist } from "@/types/artist";
+
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -72,6 +74,28 @@ export function formatNumber(
     // Fallback in case of an unexpected Intl error
     return String(num);
   }
+}
+
+/**
+ * Formats raw article data (represents artist) from Shopify
+ * @param artist - Article object from Shopify API
+ * @returns Formatted artist object
+ */
+export function formatArtist(artist: Artist) {
+  if (!artist || !artist.image) {
+    return;
+  }
+
+  return {
+    id: artist.id,
+    name: artist.title,
+    handle: artist.handle,
+    image: {
+      url: artist.image.url,
+      alt: artist.image.altText,
+    },
+    bio: artist.contentHtml,
+  };
 }
 
 export function formatProducts<

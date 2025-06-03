@@ -16,7 +16,7 @@ type ProductsGridProps = {
 export default function ProductsGrid({ products }: ProductsGridProps) {
   return (
     <div className="animate-fade-in mb-8 pb-4">
-      <div className="grid place-items-center gap-3 lg:grid-cols-3 lg:gap-4 2xl:gap-5">
+      <div className="grid gap-3 lg:grid-cols-3 lg:gap-4 2xl:gap-5">
         {products.map((product) => {
           const mainImage = product.images[0];
           const price = formatNumber(product.price);
@@ -27,13 +27,13 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
           return (
             <div key={product.cursor}>
               <Link href={`/artworks/${product.handle}`}>
-                <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs inset-shadow-sm transition-colors duration-100 ease-in select-none hover:bg-neutral-200/50">
+                <div className="flex aspect-[5/4] w-full flex-col items-center justify-center rounded bg-neutral-100 p-6 shadow-xs inset-shadow-sm transition-colors duration-150 ease-in select-none hover:bg-neutral-200/50">
                   <Image
                     src={mainImage.url}
                     alt={mainImage.altText ?? ""}
                     width={mainImage.width ?? "1920"}
                     height={mainImage.height ?? "1080"}
-                    className="max-h-full max-w-full object-contain"
+                    className="size-full object-contain"
                   />
                 </div>
               </Link>

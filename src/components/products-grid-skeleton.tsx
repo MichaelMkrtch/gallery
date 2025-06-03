@@ -1,7 +1,7 @@
 import { Skeleton } from "./ui/skeleton";
 
 export default function ProductsGridSkeleton({
-  count = 6,
+  count = 12,
 }: {
   count?: number;
 }) {

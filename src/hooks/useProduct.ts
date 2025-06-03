@@ -19,7 +19,7 @@ export function useProduct(productHandle: string) {
 
   if (error) {
     console.error(
-      "recent products hook error:",
+      "product details hook error:",
       JSON.stringify(error, null, 2),
     );
   }

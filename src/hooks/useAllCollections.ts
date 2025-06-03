@@ -18,7 +18,7 @@ export function useAllCollections() {
 
   if (error) {
     console.error(
-      "recent products hook error:",
+      "all collections hook error:",
       JSON.stringify(error, null, 2),
     );
   }

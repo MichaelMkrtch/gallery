@@ -25,10 +25,7 @@ export function useAllArtwork(): UseAllArtworksResult {
   });
 
   if (error) {
-    console.error(
-      "recent products hook error:",
-      JSON.stringify(error, null, 2),
-    );
+    console.error("all artwork hook error:", JSON.stringify(error, null, 2));
   }
 
   const products = formatProducts(data);

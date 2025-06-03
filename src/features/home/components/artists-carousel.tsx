@@ -1,4 +1,6 @@
-// import Image from "next/image";
+"use client";
+
+import Image from "next/image";
 
 import {
   Carousel,
@@ -7,19 +9,25 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useAllArtists } from "@/hooks/useAllArtists";
 
-const artists = [
-  "Artist 1",
-  "Artist 2",
-  "Artist 3",
-  "Artist 4",
-  "Artist 5",
-  "Artist 6",
-  "Artist 7",
-  "Artist 8",
-];
+import ArtistsCarouselSkeleton from "./artists-carousel-skeleton";
 
 export default function ArtistsCarousel() {
+  const { artists, loading, error } = useAllArtists(12);
+
+  if (loading) {
+    return <ArtistsCarouselSkeleton />;
+  }
+
+  if (error) {
+    throw error;
+  }
+
+  if (!artists || artists.length === 0) {
+    return <p>No artwork found.</p>;
+  }
+
   return (
     <section className="carousel-container animate-fade-in group/artists relative mb-12">
       <h2 className="text-primary mb-4 text-2xl tracking-tighter">Artists</h2>
@@ -30,21 +38,26 @@ export default function ArtistsCarousel() {
         <CarouselContent>
           {artists.map((artist) => {
             return (
-              <CarouselItem
-                key={artist}
-                className="w-fit basis-1/2 md:basis-1/3 lg:basis-1/4"
-              >
-                {/* <Image
-                  src={artist}
-                  alt="demo image"
-                  width="1920"
-                  height="1080"
-                  className="carousel-item"
-                /> */}
-                <div className="flex aspect-[3/4] items-center justify-center rounded-md bg-neutral-200 select-none">
-                  <p>{artist}</p>
-                </div>
-              </CarouselItem>
+              artist && (
+                <CarouselItem
+                  key={artist.id}
+                  className="group relative w-fit basis-1/2 select-none md:basis-1/3 lg:basis-1/4"
+                >
+                  <Image
+                    src={artist.image.url}
+                    alt={
+                      artist.image.alt ??
+                      `Portrait of the artist ${artist.name}`
+                    }
+                    width="1920"
+                    height="1080"
+                    className="carousel-item"
+                  />
+                  <div className="bg-foreground/75 text-background absolute bottom-0 left-0 flex h-14 w-full items-center justify-center rounded-sm opacity-0 transition-opacity duration-150 ease-in select-none group-hover:opacity-100">
+                    <p className="text-lg tracking-wide">{artist.name}</p>
+                  </div>
+                </CarouselItem>
+              )
             );
           })}
         </CarouselContent>

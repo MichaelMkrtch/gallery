@@ -19,7 +19,7 @@ export function useCollectionProducts(collectionHandle: string) {
 
   if (error) {
     console.error(
-      "recent products hook error:",
+      "collection products hook error:",
       JSON.stringify(error, null, 2),
     );
   }

@@ -9,8 +9,8 @@ export default function ArtistsGridSkeleton({
     <section className="animate-fade-in">
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-3">
         {[...Array(count)].map((_, i) => (
-          <div key={i} className="aspect-[4/5] max-w-[290px]">
-            <Skeleton className="aspect-[4/5]" />
+          <div key={i} className="aspect-[2/3] max-w-[290px]">
+            <Skeleton className="aspect-[2/3]" />
           </div>
         ))}
       </div>

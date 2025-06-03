@@ -30,7 +30,7 @@ export default function ArtistsGrid() {
               <Link
                 key={artist.id}
                 href={`/artists/${artist.handle}`}
-                className="group/artists relative aspect-[4/5] size-full max-w-[290px] object-cover"
+                className="group/artists relative aspect-[2/3] size-full max-w-[290px]"
               >
                 <Image
                   src={artist.image.url}
@@ -38,10 +38,12 @@ export default function ArtistsGrid() {
                   width={1920}
                   height={1080}
                   priority={index <= 2}
-                  className="aspect-[4/5] size-full rounded-sm"
+                  className="aspect-[2/3] size-full rounded-sm object-cover"
                 />
                 <div className="bg-foreground/75 absolute bottom-0 flex h-full w-full items-center justify-start rounded-sm transition-opacity duration-150 ease-in sm:justify-center xl:opacity-0 xl:group-hover/artists:opacity-100">
-                  <p className="text-background">{artist.name}</p>
+                  <p className="text-background text-xl tracking-wide">
+                    {artist.name}
+                  </p>
                 </div>
               </Link>
             )

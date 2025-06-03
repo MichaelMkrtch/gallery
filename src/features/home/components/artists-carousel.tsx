@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   Carousel,
@@ -43,19 +44,21 @@ export default function ArtistsCarousel() {
                   key={artist.id}
                   className="group relative w-fit basis-1/2 select-none md:basis-1/3 lg:basis-1/4"
                 >
-                  <Image
-                    src={artist.image.url}
-                    alt={
-                      artist.image.alt ??
-                      `Portrait of the artist ${artist.name}`
-                    }
-                    width="1920"
-                    height="1080"
-                    className="carousel-item"
-                  />
-                  <div className="bg-foreground/75 text-background absolute bottom-0 left-0 flex h-14 w-full items-center justify-center rounded-sm opacity-0 transition-opacity duration-150 ease-in select-none group-hover:opacity-100">
-                    <p className="text-lg tracking-wide">{artist.name}</p>
-                  </div>
+                  <Link href={`/artists/${artist.handle}`}>
+                    <Image
+                      src={artist.image.url}
+                      alt={
+                        artist.image.alt ??
+                        `Portrait of the artist ${artist.name}`
+                      }
+                      width="1920"
+                      height="1080"
+                      className="carousel-item grayscale filter"
+                    />
+                    <div className="bg-foreground/75 text-background absolute bottom-0 left-0 flex h-14 w-full items-center justify-center rounded-sm opacity-0 transition-opacity duration-150 ease-in select-none group-hover:opacity-100">
+                      <p className="text-lg tracking-wide">{artist.name}</p>
+                    </div>
+                  </Link>
                 </CarouselItem>
               )
             );

@@ -65,7 +65,7 @@ export default function ArtistPage() {
             height={1920}
             width={1080}
             priority
-            className="aspect-[4/5] w-full rounded-sm object-cover"
+            className="aspect-[2/3] w-full rounded-sm object-cover"
           />
 
           <section className="place-self-center">

@@ -1,10 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+import Search from "@/features/home/components/search/search";
+
+import { BagIcon } from "./icons/BagIcon";
+import Tooltip from "./tooltip";
+import { TooltipProvider } from "./ui/tooltip-ui";
 
 export default function Header() {
   return (
@@ -49,12 +50,20 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="bg-background relative hidden items-center justify-center rounded-full border-1 border-neutral-200 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 md:flex lg:w-60 2xl:w-[270px]">
-        <Search size="20" className="ml-2 text-neutral-500" />
-        <Input
-          className="h-9 w-full border-none font-semibold shadow-none placeholder:font-medium placeholder:text-neutral-400 focus-visible:ring-0"
-          placeholder="Search"
-        />
+      <div className="hidden justify-end gap-2 md:flex lg:w-60 2xl:w-[270px]">
+        <TooltipProvider>
+          <Tooltip side="bottom" sideOffset={12} content="Search">
+            <div>
+              <Search />
+            </div>
+          </Tooltip>
+
+          <Tooltip side="bottom" sideOffset={12} content="Bag">
+            <button className="rounded-full border border-neutral-200 p-2 text-neutral-500 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs">
+              <BagIcon classes="size-5 active:translate-y-px" />
+            </button>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </header>
   );

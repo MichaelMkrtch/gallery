@@ -15,9 +15,9 @@ type ProductConnection<TProductNode> = {
   edges: Array<ProductEdge<TProductNode> | null | undefined>;
 };
 
-interface DataWithConnection<TProductNode> {
+type DataWithConnection<TProductNode> = {
   products: ProductConnection<TProductNode> | null | undefined;
-}
+};
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

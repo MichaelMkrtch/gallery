@@ -1,0 +1,43 @@
+query PredictiveSearch(
+  $searchText: String!
+  $first: Int!
+  $types: [SearchType!]
+  $metafieldNamespace: String = "custom"
+  $artistKey: String = "artist"
+) {
+  search(query: $searchText, first: $first, types: $types) {
+    edges {
+      node {
+        __typename
+        ... on Product {
+          id
+          title
+          handle
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+                width
+                height
+              }
+            }
+          }
+          artist: metafield(namespace: $metafieldNamespace, key: $artistKey) {
+            value
+            type
+          }
+        }
+        ... on Article {
+          id
+          title
+          handle
+          image {
+            url
+            altText
+          }
+        }
+      }
+    }
+  }
+}

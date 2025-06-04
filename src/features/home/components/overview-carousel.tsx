@@ -78,7 +78,7 @@ export default function OverviewCarousel() {
                   alt="demo image"
                   width="1920"
                   height="1080"
-                  className="carousel-item aspect-[16/9] md:aspect-[21/9]"
+                  className="carousel-item aspect-[16/9] select-none md:aspect-[21/9]"
                   priority
                 />
               </CarouselItem>

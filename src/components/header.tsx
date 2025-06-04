@@ -4,8 +4,6 @@ import Link from "next/link";
 import Search from "@/features/home/components/search/search";
 
 import { BagIcon } from "./icons/BagIcon";
-import Tooltip from "./tooltip";
-import { TooltipProvider } from "./ui/tooltip-ui";
 
 export default function Header() {
   return (
@@ -51,19 +49,13 @@ export default function Header() {
       </nav>
 
       <div className="hidden justify-end gap-2 md:flex lg:w-60 2xl:w-[270px]">
-        <TooltipProvider>
-          <Tooltip side="bottom" sideOffset={12} content="Search">
-            <div>
-              <Search />
-            </div>
-          </Tooltip>
+        <div>
+          <Search />
+        </div>
 
-          <Tooltip side="bottom" sideOffset={12} content="Bag">
-            <button className="rounded-full border border-neutral-200 p-2 text-neutral-500 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs">
-              <BagIcon classes="size-5 active:translate-y-px" />
-            </button>
-          </Tooltip>
-        </TooltipProvider>
+        <button className="focus-visible:primary rounded-full border border-neutral-200 p-2 text-neutral-500 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs">
+          <BagIcon classes="size-5 active:translate-y-px" />
+        </button>
       </div>
     </header>
   );

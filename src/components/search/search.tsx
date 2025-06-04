@@ -34,7 +34,7 @@ export default function Search() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="focus-visible:outline-primary ml-auto w-fit cursor-pointer rounded-full border border-neutral-200 p-2 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs">
+        <button className="focus-visible:outline-primary ml-auto w-fit cursor-pointer rounded-full border border-neutral-200 p-2 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 transition-colors duration-150 hover:bg-neutral-100 active:shadow-none active:inset-shadow-xs">
           <SearchIcon
             size="20"
             className="text-neutral-500 active:translate-y-px"

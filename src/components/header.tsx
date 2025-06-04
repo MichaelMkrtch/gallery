@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Search from "@/features/home/components/search/search";
-
-import { BagIcon } from "./icons/BagIcon";
+import Bag from "./bag/bag";
+import Search from "./search/search";
 
 export default function Header() {
   return (
@@ -48,14 +47,9 @@ export default function Header() {
         </ul>
       </nav>
 
-      <div className="hidden justify-end gap-2 md:flex lg:w-60 2xl:w-[270px]">
-        <div>
-          <Search />
-        </div>
-
-        <button className="focus-visible:primary rounded-full border border-neutral-200 p-2 text-neutral-500 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs">
-          <BagIcon classes="size-5 active:translate-y-px" />
-        </button>
+      <div className="hidden justify-end gap-2.5 md:flex lg:w-60 2xl:w-[270px]">
+        <Search />
+        <Bag />
       </div>
     </header>
   );

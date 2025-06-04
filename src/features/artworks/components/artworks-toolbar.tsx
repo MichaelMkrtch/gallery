@@ -19,7 +19,7 @@ export default function ArtworksToolbar() {
       {/* Filter Dropdown Menu */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
+          <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 transition-colors duration-150 outline-none select-none hover:bg-neutral-100 data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
             <span className="flex items-center justify-center gap-1 active:translate-y-px">
               <ListFilter size={18} />
               Filter
@@ -41,7 +41,7 @@ export default function ArtworksToolbar() {
       {/* Sort Dropdown Menu */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 outline-none select-none data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
+          <button className="relative cursor-pointer rounded-lg border border-neutral-200 px-1.5 py-1 shadow-2xs shadow-neutral-300 transition-colors duration-150 outline-none select-none hover:bg-neutral-100 data-[state=open]:shadow-none data-[state=open]:inset-shadow-sm data-[state=open]:inset-shadow-neutral-300">
             <span className="flex items-center justify-center gap-1 active:translate-y-px">
               <ArrowDownUp size={18} />
               Sort

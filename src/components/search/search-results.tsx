@@ -51,6 +51,16 @@ export default function SearchResults({
     results = [];
   }
 
+  if (!results || results.length === 0) {
+    return (
+      <div className="bg-background w-fulloverflow-auto relative h-[350px]">
+        <p className="animate-fade-in absolute top-1/3 right-0 left-0 text-center text-lg text-neutral-500">
+          Search for an artist or artwork
+        </p>
+      </div>
+    );
+  }
+
   return (
     results && (
       <div className="bg-background h-[350px] w-full overflow-auto">

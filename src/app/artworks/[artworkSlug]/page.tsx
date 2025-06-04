@@ -39,7 +39,7 @@ export default function ArtworkPage() {
 
       <button
         onClick={() => router.back()}
-        className="mb-4 rounded-full border border-neutral-200 p-1 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 active:shadow-none active:inset-shadow-xs"
+        className="mb-4 rounded-full border border-neutral-200 p-1 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 transition-colors duration-150 hover:bg-neutral-100 active:shadow-none active:inset-shadow-xs"
       >
         <ArrowLeft
           size={20}

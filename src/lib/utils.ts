@@ -2,6 +2,7 @@ import type { Product, RawGraphQLProductNode } from "@/types/products";
 import type { ClassValue } from "clsx";
 
 import { Artist } from "@/types/artist";
+import { CollectionNode, CollectionOf } from "@/types/collection";
 
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -138,9 +139,11 @@ export function formatProducts<
         handle: product.handle,
         descriptionHtml: product.descriptionHtml,
         artist: product.artist?.value,
+        category: product.category?.value,
         genre: product.genre?.value,
-        type: product.type?.value,
         medium: product.medium?.value,
+        style: product.style?.value,
+        type: product.type?.value,
         dimensions: product.dimensions?.value,
         price: product.priceRange.minVariantPrice.amount as string,
         currencyCode: product.priceRange.minVariantPrice.currencyCode,
@@ -153,4 +156,35 @@ export function formatProducts<
     .filter((product) => product !== null);
 
   return products;
+}
+
+export function categorizeCollections(collections: CollectionNode[]) {
+  const categories: CollectionOf<"category">[] = [];
+  const artists: CollectionOf<"artist">[] = [];
+  const styles: CollectionOf<"style">[] = [];
+  const genres: CollectionOf<"genre">[] = [];
+
+  for (const collection of collections) {
+    switch (collection.type) {
+      case "category":
+        categories.push(collection);
+        break;
+      case "artist":
+        artists.push(collection);
+        break;
+      case "style":
+        styles.push(collection);
+        break;
+      case "genre":
+        genres.push(collection);
+        break;
+      default:
+        if (process.env.NODE_ENV === "development") {
+          console.warn(`Unknown collection type: ${collection.type}`);
+        }
+        break;
+    }
+  }
+
+  return { categories, artists, styles, genres };
 }

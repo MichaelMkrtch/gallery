@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 import { useAllCollections } from "@/hooks/useAllCollections";
 import { slugifyName } from "@/lib/utils";
+import { useUrlStore } from "@/store/url-store";
 
 type PageHeaderProps = {
   title: string;
@@ -13,27 +14,31 @@ type PageHeaderProps = {
 };
 
 export default function PageHeader({ title, artist }: PageHeaderProps) {
-  const [collectionName, setCollectionName] = useState("");
   const pathname = usePathname();
-
-  // Loading and error states are handled in main page components.
-  // They are unnecessary here since the subtitle is informational.
   const { collections } = useAllCollections();
+  const categorySlugs = useUrlStore.use.query().category;
 
-  useEffect(() => {
-    if (collections) {
-      const collectionMatch = collections.find(
-        (collection) => `/artworks/genres/${collection.handle}` === pathname,
-      ) ?? { title: "All Artworks" };
+  const categoryNames = useMemo(() => {
+    if (!collections || !categorySlugs?.length) return [];
 
-      setCollectionName(collectionMatch.title);
-    }
-  }, [collections, pathname]);
+    return collections
+      .filter((c) => c.type === "category")
+      .filter((c) => categorySlugs.includes(c.handle))
+      .map((c) => c.title);
+  }, [collections, categorySlugs]);
 
-  const slug = slugifyName(artist);
+  const getSubtitleText = () => {
+    if (artist) return artist;
+    if (!categoryNames.length) return "All Artworks";
+    if (categoryNames.length === 1) return categoryNames[0];
 
-  const subtitleText = artist ? artist : (collectionName ?? "");
-  const subtitleLink = artist ? `/artists/${slug}` : "";
+    const last = categoryNames[categoryNames.length - 1];
+    const others = categoryNames.slice(0, -1);
+    return `${others.join(", ")} and ${last}`;
+  };
+
+  const subtitleText = getSubtitleText();
+  const subtitleLink = artist ? `/artists/${slugifyName(artist)}` : "";
 
   const subtitle = subtitleLink ? (
     <Link

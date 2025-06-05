@@ -4,6 +4,7 @@ import type {
 } from "@/graphql/generated/graphql";
 
 import { GetAllCollectionsDocument } from "@/graphql/generated/graphql";
+import { CollectionNode } from "@/types/collection";
 
 import { useQuery } from "@apollo/client";
 
@@ -23,10 +24,15 @@ export function useAllCollections() {
     );
   }
 
-  const collections = data?.collections.edges.map((edge) => edge.node);
+  const collections = data?.collections.edges.map((edge) => {
+    return {
+      ...edge.node,
+      type: edge.node.type?.value,
+    };
+  });
 
   return {
-    collections,
+    collections: collections as CollectionNode[],
     loading: loading && !data,
     error,
   };

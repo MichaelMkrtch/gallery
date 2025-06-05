@@ -27,10 +27,10 @@ export default function ArtworksToolbar() {
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="bg-background border-neutral-200">
+        <DropdownMenuContent className="bg-background relative top-1 right-4 border-neutral-200 px-3">
           <DropdownMenuLabel className="text-base">Filter by</DropdownMenuLabel>
 
-          <DropdownMenuGroup className="w-full space-y-0.25">
+          <DropdownMenuGroup className="mt-3 w-full space-y-0.25">
             <Suspense fallback={<DropdownSkeleton count={4} />}>
               <FilterDropdownItems />
             </Suspense>

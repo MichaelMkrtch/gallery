@@ -16,9 +16,11 @@ export type Product = {
   price: string;
   currencyCode: CurrencyCode;
   artist?: string | null;
+  category?: string | null;
   genre?: string | null;
-  type?: string | null;
   medium?: string | null;
+  style?: string | null;
+  type?: string | null;
   dimensions?: string | null;
   createdAt: string;
 };
@@ -58,17 +60,27 @@ export type RawGraphQLProductNode = {
     value?: string | null;
     type?: string;
   } | null;
+  category?: {
+    __typename?: "Metafield";
+    value?: string | null;
+    type?: string;
+  } | null;
   genre?: {
     __typename?: "Metafield";
     value?: string | null;
     type?: string;
   } | null;
-  type?: {
+  medium?: {
     __typename?: "Metafield";
     value?: string | null;
     type?: string;
   } | null;
-  medium?: {
+  style?: {
+    __typename?: "Metafield";
+    value?: string | null;
+    type?: string;
+  } | null;
+  type?: {
     __typename?: "Metafield";
     value?: string | null;
     type?: string;

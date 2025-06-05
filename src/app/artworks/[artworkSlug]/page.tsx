@@ -1,16 +1,14 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import PageHeader from "@/components/page-header";
 import ArtworkCarousel from "@/features/artworks/components/product-page/artwork-carousel";
 import ArtworkPageSkeleton from "@/features/artworks/components/product-page/artwork-page-skeleton";
+import ReturnButton from "@/features/artworks/components/product-page/return-button";
 import { useProduct } from "@/hooks/useProduct";
 
-import { ArrowLeft } from "lucide-react";
-
 export default function ArtworkPage() {
-  const router = useRouter();
   const pathname = usePathname();
 
   const segments = pathname.split("/").filter(Boolean);
@@ -37,15 +35,7 @@ export default function ArtworkPage() {
     <div className="mb-10">
       <PageHeader title={product.title} artist={product.artist} />
 
-      <button
-        onClick={() => router.back()}
-        className="mb-4 rounded-full border border-neutral-200 p-1 shadow-2xs shadow-neutral-300 inset-shadow-neutral-300 transition-colors duration-150 hover:bg-neutral-100 active:shadow-none active:inset-shadow-xs"
-      >
-        <ArrowLeft
-          size={20}
-          className="text-foreground cursor-pointer transition-colors duration-100 active:translate-y-px"
-        />
-      </button>
+      <ReturnButton />
 
       <main className="animate-fade-in grid grid-cols-[800px_1fr] gap-6">
         <ArtworkCarousel images={product.images} />

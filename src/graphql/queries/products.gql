@@ -4,9 +4,11 @@ query GetAllProducts(
   $imagesFirst: Int = 1
   $metafieldNamespace: String = "custom"
   $artistKey: String = "artist"
+  $categoryKey: String = "category"
   $genreKey: String = "genre"
-  $typeKey: String = "type"
   $mediumKey: String = "medium"
+  $styleKey: String = "style"
+  $typeKey: String = "type"
   $dimensionsKey: String = "dimensions"
 ) {
   products(first: $first, after: $after) {
@@ -43,15 +45,23 @@ query GetAllProducts(
           value
           type
         }
+        category: metafield(namespace: $metafieldNamespace, key: $categoryKey) {
+          value
+          type
+        }
         genre: metafield(namespace: $metafieldNamespace, key: $genreKey) {
           value
           type
         }
-        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
+        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
           value
           type
         }
-        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
+        style: metafield(namespace: $metafieldNamespace, key: $styleKey) {
+          value
+          type
+        }
+        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
           value
           type
         }
@@ -74,9 +84,11 @@ query GetRecentProducts(
   $imagesFirst: Int = 1
   $metafieldNamespace: String = "custom"
   $artistKey: String = "artist"
+  $categoryKey: String = "category"
   $genreKey: String = "genre"
-  $typeKey: String = "type"
   $mediumKey: String = "medium"
+  $styleKey: String = "style"
+  $typeKey: String = "type"
   $dimensionsKey: String = "dimensions"
 ) {
   products(first: $first, sortKey: $sortKey, reverse: $reverse) {
@@ -109,15 +121,23 @@ query GetRecentProducts(
           value
           type
         }
+        category: metafield(namespace: $metafieldNamespace, key: $categoryKey) {
+          value
+          type
+        }
         genre: metafield(namespace: $metafieldNamespace, key: $genreKey) {
           value
           type
         }
-        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
+        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
           value
           type
         }
-        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
+        style: metafield(namespace: $metafieldNamespace, key: $styleKey) {
+          value
+          type
+        }
+        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
           value
           type
         }
@@ -140,9 +160,11 @@ query GetCollectionProducts(
   $imagesFirst: Int = 1
   $metafieldNamespace: String = "custom"
   $artistKey: String = "artist"
+  $categoryKey: String = "category"
   $genreKey: String = "genre"
-  $typeKey: String = "type"
   $mediumKey: String = "medium"
+  $styleKey: String = "style"
+  $typeKey: String = "type"
   $dimensionsKey: String = "dimensions"
 ) {
   collectionByHandle(handle: $collectionHandle) {
@@ -180,15 +202,26 @@ query GetCollectionProducts(
             value
             type
           }
+          category: metafield(
+            namespace: $metafieldNamespace
+            key: $categoryKey
+          ) {
+            value
+            type
+          }
           genre: metafield(namespace: $metafieldNamespace, key: $genreKey) {
             value
             type
           }
-          type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
+          medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
             value
             type
           }
-          medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
+          style: metafield(namespace: $metafieldNamespace, key: $styleKey) {
+            value
+            type
+          }
+          type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
             value
             type
           }
@@ -210,9 +243,11 @@ query GetProduct(
   $imagesFirst: Int = 6
   $metafieldNamespace: String = "custom"
   $artistKey: String = "artist"
+  $categoryKey: String = "category"
   $genreKey: String = "genre"
-  $typeKey: String = "type"
   $mediumKey: String = "medium"
+  $styleKey: String = "style"
+  $typeKey: String = "type"
   $dimensionsKey: String = "dimensions"
 ) {
   products(first: 1, query: $handle) {
@@ -245,15 +280,23 @@ query GetProduct(
           value
           type
         }
+        category: metafield(namespace: $metafieldNamespace, key: $categoryKey) {
+          value
+          type
+        }
         genre: metafield(namespace: $metafieldNamespace, key: $genreKey) {
           value
           type
         }
-        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
+        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
           value
           type
         }
-        medium: metafield(namespace: $metafieldNamespace, key: $mediumKey) {
+        style: metafield(namespace: $metafieldNamespace, key: $styleKey) {
+          value
+          type
+        }
+        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
           value
           type
         }

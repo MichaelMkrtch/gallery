@@ -1,9 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { useUrlStore } from "@/store/url-store";
 
 import { ArrowDown, ArrowUp } from "lucide-react";
 
@@ -33,20 +36,57 @@ const sortOptions = [
 ];
 
 export default function SortDropdownItems() {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const sortBy = searchParams.get("sort-by") as SortBy;
+  const currentSort = searchParams.get("sort-by") as SortBy;
 
-  return sortOptions.map((option) => {
-    return (
-      <Link key={option.text} href={`/artworks?sort-by=${option.queryParam}`}>
+  const setQuery = useUrlStore.use.setQuery();
+
+  const handleSortChange = (value: SortBy) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value) {
+      params.set("sort-by", value);
+      setQuery("sort-by", value);
+    } else {
+      params.delete("sort-by");
+      setQuery("sort-by", undefined);
+    }
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  return (
+    <>
+      {sortOptions.map((option) => (
         <DropdownMenuItem
-          className={`${sortBy === option.queryParam ? "bg-neutral-200 focus:bg-neutral-300" : ""} dropdown-link`}
+          key={option.text}
+          onSelect={(e) => {
+            e.preventDefault();
+            handleSortChange(option.queryParam);
+          }}
+          className={`${
+            currentSort === option.queryParam ? "bg-neutral-200/85" : ""
+          } dropdown-link`}
         >
           {option.icon}
           {option.text}
         </DropdownMenuItem>
-      </Link>
-    );
-  });
+      ))}
+
+      <DropdownMenuSeparator />
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handleSortChange(undefined);
+        }}
+        className="mx-auto w-full cursor-pointer rounded-md px-3 py-1 text-sm transition-colors duration-100 ease-in hover:bg-neutral-100"
+      >
+        Reset
+      </button>
+    </>
+  );
 }

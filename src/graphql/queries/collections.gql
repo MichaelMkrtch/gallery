@@ -1,10 +1,17 @@
-query GetAllCollections {
+query GetAllCollections(
+  $metafieldNamespace: String = "custom"
+  $typeKey: String = "type"
+) {
   collections(first: 10) {
     edges {
       node {
         id
         handle
         title
+        type: metafield(namespace: $metafieldNamespace, key: $typeKey) {
+          value
+          type
+        }
       }
       cursor
     }

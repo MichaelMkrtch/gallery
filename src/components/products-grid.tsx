@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { formatNumber, slugifyName } from "@/lib/utils";
 
-import { BagIcon } from "./icons/BagIcon";
+import AddToBagBtn from "./bag/add-to-bag-btn";
 
 type ProductsGridProps = {
   products: Product[];
@@ -66,10 +66,7 @@ export default function ProductsGrid({ products }: ProductsGridProps) {
                 </div>
               </div>
 
-              <button className="flex w-fit cursor-pointer items-center gap-1 text-sky-800 duration-100 ease-in outline-none hover:text-sky-700">
-                <BagIcon classes="size-5" />
-                <span>Add to bag</span>
-              </button>
+              <AddToBagBtn type="minimal" product={product} />
             </div>
           );
         })}

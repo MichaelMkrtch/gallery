@@ -311,3 +311,28 @@ query GetProduct(
     }
   }
 }
+
+query GetProductsForCheckout($ids: [ID!]!) {
+  products: nodes(ids: $ids) {
+    __typename
+    ... on Product {
+      id
+      handle
+      title
+      availableForSale
+      variants(first: 1) {
+        edges {
+          node {
+            id
+            availableForSale
+            quantityAvailable
+            price {
+              amount
+              currencyCode
+            }
+          }
+        }
+      }
+    }
+  }
+}

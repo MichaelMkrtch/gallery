@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
+import AddToBagBtn from "@/components/bag/add-to-bag-btn";
 import PageHeader from "@/components/page-header";
 import ArtworkCarousel from "@/features/artworks/components/product-page/artwork-carousel";
 import ArtworkPageSkeleton from "@/features/artworks/components/product-page/artwork-page-skeleton";
@@ -63,9 +64,7 @@ export default function ArtworkPage() {
           </div>
 
           <section className="mt-4">
-            <button className="text-background w-full rounded-lg bg-sky-800 px-6 py-2 shadow-2xs shadow-sky-900 transition-colors duration-200 hover:bg-sky-700 active:scale-[99%]">
-              Add to bag
-            </button>
+            <AddToBagBtn type="solid" product={product} />
           </section>
         </section>
       </main>

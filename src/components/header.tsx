@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Bag from "./bag/bag";
 import Search from "./search/search";
 
 export default function Header() {
@@ -36,9 +35,6 @@ export default function Header() {
             <Link href="/artists">Artists</Link>
           </li>
           <li className="navlink">
-            <Link href="/artworks">Artworks</Link>
-          </li>
-          <li className="navlink">
             <Link href="/about">About</Link>
           </li>
           <li className="navlink">
@@ -49,7 +45,6 @@ export default function Header() {
 
       <div className="hidden justify-end gap-2.5 md:flex lg:w-60 2xl:w-[270px]">
         <Search />
-        <Bag />
       </div>
     </header>
   );

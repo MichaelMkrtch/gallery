@@ -3,21 +3,17 @@ import Link from "next/link";
 
 import { DialogClose } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  FormattedResultItem,
-  FormattedSearchResultsType,
-} from "@/types/search";
 
 import { type ApolloError } from "@apollo/client";
 
 type SearchResultsProps = {
-  results: FormattedSearchResultsType;
+  results: any;
   loading: boolean;
   error: ApolloError | undefined;
   searchTerm: string;
 };
 
-function getLink(result: FormattedResultItem) {
+function getLink(result: any) {
   if (result?.__typename === "Product") {
     return `/artworks/${result.handle}`;
   }

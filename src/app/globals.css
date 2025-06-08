@@ -45,10 +45,6 @@
     @apply hover:text-primary transition-colors duration-150;
   }
 
-  .dropdown-link {
-    @apply my-1 flex cursor-pointer items-center justify-start gap-1;
-  }
-
   .carousel-container {
     @apply relative mb-6 overflow-hidden rounded-md;
   }

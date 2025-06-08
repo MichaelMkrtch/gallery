@@ -1,6 +1,4 @@
-import ArtistsCarousel from "@/features/home/components/artists-carousel";
 import OverviewCarousel from "@/features/home/components/overview-carousel";
-import RecentProducts from "@/features/home/components/recent-products";
 
 export default function Home() {
   return (
@@ -18,10 +16,6 @@ export default function Home() {
           totam.
         </p>
       </section>
-
-      <ArtistsCarousel />
-
-      <RecentProducts />
     </main>
   );
 }
